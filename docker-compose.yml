@@ -1,0 +1,9 @@
+services:
+  bot:
+    build: .
+    container_name: soz-top-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./words.txt:/app/words.txt:ro
