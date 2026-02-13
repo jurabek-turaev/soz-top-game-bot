@@ -18,7 +18,7 @@ from aiogram.types import (
 )
 from aiogram.filters import Command, CommandStart
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-
+from aiogram.enums import ButtonStyle
 
 load_dotenv()
 
@@ -26,7 +26,7 @@ TOKEN = os.getenv("BOT_TOKEN")
 if not TOKEN:
     raise RuntimeError("BOT_TOKEN env variable qo'ying!")
 
-WORDS_FILE = os.getenv("WORDS_FILE", "wordlist.txt")
+WORDS_FILE = os.getenv("WORDS_FILE", "words.txt")
 HOST_LOCK_SECONDS = 5 * 60
 
 def load_words(path: str) -> list[str]:
@@ -88,15 +88,27 @@ def pick_word(state: ChatState) -> str:
 
 def panel_kb(round_id: str) -> InlineKeyboardMarkup:
     kb = InlineKeyboardBuilder()
-    kb.button(text="👀 So'zni ko'rish", callback_data=f"sw:{round_id}")
-    kb.button(text="⏭️ Yangi so'z", callback_data=f"nw:{round_id}")
+    kb.button(
+        text="👀 So'zni ko'rish",
+        callback_data=f"sw:{round_id}",
+        style=ButtonStyle.PRIMARY
+    )
+    kb.button(
+        text="⏭️ Yangi so'z",
+        callback_data=f"nw:{round_id}",
+        style=ButtonStyle.SUCCESS
+    )
     kb.adjust(2)  # 1 qatorda 2ta tugma
     return kb.as_markup()
 
 
 def claim_kb(token: str) -> InlineKeyboardMarkup:
     kb = InlineKeyboardBuilder()
-    kb.button(text="✋ Boshlovchi bo'lishni xohlayman!", callback_data=f"cl:{token}")
+    kb.button(
+        text="✋ Boshlovchi bo'lishni xohlayman!",
+        callback_data=f"cl:{token}",
+        style=ButtonStyle.PRIMARY
+    )
     kb.adjust(1)
     return kb.as_markup()
 
