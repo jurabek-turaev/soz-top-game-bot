@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 URL = "https://1000mostcommonwords.com/1000-most-common-uzbek-words/"
-OUT = "wordlist.txt"
+OUT = "words.txt"
 
 def norm_word(w: str) -> str:
     w = w.strip().lower()
