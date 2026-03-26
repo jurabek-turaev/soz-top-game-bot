@@ -130,6 +130,7 @@ async def start_round(chat_id: int, host_user, reply_to: Optional[Message] = Non
     state.claimed_by = None
 
     text = (
+        f"✅ O'yin boshlandi!\n"
         f"🔥 <b>{state.host_name}</b> so'zni tushuntiradi.\n\n"
         f"Boshlovchi uchun tugmalar 👇"
     )
@@ -140,9 +141,6 @@ async def start_round(chat_id: int, host_user, reply_to: Optional[Message] = Non
         parse_mode="HTML",
     )
     state.panel_msg_id = msg.message_id
-
-    if reply_to:
-        await reply_to.answer("✅ O'yin boshlandi!")
 
 
 
@@ -316,4 +314,5 @@ async def main():
     await dp.start_polling(bot, polling_timeout=60)
 
 if __name__ == "__main__":
+    print("Bot ishga tushdi!")
     asyncio.run(main())
