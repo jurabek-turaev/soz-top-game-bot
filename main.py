@@ -14,7 +14,8 @@ from aiogram.types import (
     Message,
     CallbackQuery,
     InlineKeyboardButton,
-    InlineKeyboardMarkup
+    InlineKeyboardMarkup,
+    BotCommand
 )
 from aiogram.filters import Command, CommandStart
 from aiogram.utils.keyboard import InlineKeyboardBuilder
@@ -307,10 +308,17 @@ async def on_text(message: Message):
         )
 
 
-
+async def set_commands(bot: Bot):
+    commands = [
+        BotCommand(command="start", description="O'yinni boshlash"),
+        BotCommand(command="rules", description="Qoidalar"),
+        BotCommand(command="help", description="Yordam"),
+    ]
+    await bot.set_my_commands(commands)
 
 
 async def main():
+    await set_commands(bot)
     await dp.start_polling(bot, polling_timeout=60)
 
 if __name__ == "__main__":
